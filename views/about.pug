@@ -1,0 +1,12 @@
+extends ./layout.pug
+
+block body
+  div.welcome
+    != PrismicDOM.RichText.asHtml(document.data.title, ctx.linkResolver)
+    img(src=document.data.image.url, class='star')
+    != PrismicDOM.RichText.asHtml(document.data.description, ctx.linkResolver)
+    for slice in document.data.body
+        case slice.sliceType
+            when "text"
+                != PrismicDOM.RichText.asHtml(slice.primary.extra_content, ctx.linkResolver)
+    != PrismicDOM.RichText.asHtml(document.data.more_text, ctx.linkResolver)
